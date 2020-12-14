@@ -1,3 +1,7 @@
+# DISCLAIMER: THIS IS A PROJECT FOR THE MVA COURSE. 
+THE CODE HAS BEEN COPIED FROM THE FOLLOWING REPO: https://github.com/tamarott/SinGAN
+
+
 # SinGAN
 
 [Project](https://tamarott.github.io/SinGAN.htm) | [Arxiv](https://arxiv.org/pdf/1905.01164.pdf) | [CVF](http://openaccess.thecvf.com/content_ICCV_2019/papers/Shaham_SinGAN_Learning_a_Generative_Model_From_a_Single_Natural_Image_ICCV_2019_paper.pdf) 
