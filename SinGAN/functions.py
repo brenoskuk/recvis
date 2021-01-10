@@ -278,6 +278,8 @@ def generate_dir2save(opt):
         dir2save = '%s/SR/%s' % (opt.out, opt.sr_factor)
     elif opt.mode == 'harmonization':
         dir2save = '%s/Harmonization/%s/%s_out' % (opt.out, opt.input_name[:-4],opt.ref_name[:-4])
+    elif opt.mode == 'inpainting':
+        dir2save = '%s/Inpainting/%s/%s_out' % (opt.out, opt.input_name[:-4],opt.input_name[:-4])
     elif opt.mode == 'editing':
         dir2save = '%s/Editing/%s/%s_out' % (opt.out, opt.input_name[:-4],opt.ref_name[:-4])
     elif opt.mode == 'paint2image':
@@ -347,6 +349,9 @@ def dilate_mask(mask,opt):
         element = morphology.disk(radius=7)
     if opt.mode == "editing":
         element = morphology.disk(radius=20)
+    if opt.mode == "inpainting":
+        element = morphology.disk(radius=7)
+    
     mask = torch2uint8(mask)
     mask = mask[:,:,0]
     mask = morphology.binary_dilation(mask,selem=element)
@@ -356,7 +361,8 @@ def dilate_mask(mask,opt):
     mask = np2torch(mask,opt)
     opt.nc_im = nc_im
     mask = mask.expand(1, 3, mask.shape[2], mask.shape[3])
-    plt.imsave('%s/%s_mask_dilated.png' % (opt.ref_dir, opt.ref_name[:-4]), convert_image_np(mask), vmin=0,vmax=1)
+    if opt.mode != "inpainting":
+      plt.imsave('%s/%s_mask_dilated.png' % (opt.ref_dir, opt.ref_name[:-4]), convert_image_np(mask), vmin=0,vmax=1)
     mask = (mask-mask.min())/(mask.max()-mask.min())
     return mask
 
