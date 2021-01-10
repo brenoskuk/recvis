@@ -1,6 +1,6 @@
 from config import get_arguments
 from SinGAN.manipulate import *
-from SinGAN.training import *
+from SinGAN.training_inpainting import *
 import SinGAN.functions as functions
 
 
@@ -33,5 +33,5 @@ if __name__ == '__main__':
         functions.adjust_scales2image(mask, opt)
         #mask = functions.read_image_dir('%s/%s_mask%s' % (opt.ref_dir,opt.ref_name[:-4],opt.ref_name[-4:]), opt)
         
-        train_inpainting(opt, Gs, Zs, reals, NoiseAmp)
-        SinGAN_generate_inpainting(Gs,Zs,reals,NoiseAmp,opt)
+        train_inpainting(opt, Gs, Zs, reals, masks, NoiseAmp)
+        SinGAN_generate(Gs,Zs,reals,masks, NoiseAmp,opt)
