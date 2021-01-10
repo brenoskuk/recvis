@@ -10,9 +10,9 @@ from SinGAN.imresize import imresize
 
 def train_inpainting(opt,Gs,Zs,reals,masks,NoiseAmp):
     real_ = functions.read_image(opt)
-    mask_ = functions.read_image(opt)
+    mask_ = functions.read_image_mask(opt)
     in_s = 0
-    scale_num = 0
+    scale_num = 0       
     real = imresize(real_,opt.scale1,opt)
     mask = imresize(mask_,opt.scale1,opt)
     
