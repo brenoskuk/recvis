@@ -153,10 +153,11 @@ def read_image(opt):
     return x
 
 def read_image_mask(opt):
-x = img.imread('%s/%s' % (opt.input_dir_mask,opt.input_name_mask))
-x = np2torch(x,opt)
-x = x[:,0:3,:,:]
-return x
+    x = img.imread('%s/%s' % (opt.input_dir_mask,opt.input_name_mask))
+    print(x.shape)
+    x = np2torch(x,opt)
+    x = x[:,0:3,:,:]
+    return x
 
 def read_image_dir(dir,opt):
     x = img.imread('%s' % (dir))
