@@ -12,6 +12,9 @@ if __name__ == '__main__':
     parser.add_argument('--input_name', help='training image name', required=True)
     parser.add_argument('--ref_dir', help='input reference dir', default='Input/Editing')
     parser.add_argument('--ref_name', help='reference image name', required=True)
+    parser.add_argument('--mask_dir', help='input reference dir', default='Input/Editing')
+    parser.add_argument('--mask_name', help='reference image name', required=True)
+    
     parser.add_argument('--editing_start_scale', help='editing injection scale', type=int, required=True)
     parser.add_argument('--mode', help='task to be done', default='editing')
     opt = parser.parse_args()
@@ -37,7 +40,7 @@ if __name__ == '__main__':
             print("injection scale should be between 1 and %d" % (len(Gs)-1))
         else:
             ref = functions.read_image_dir('%s/%s' % (opt.ref_dir, opt.ref_name), opt)
-            mask = functions.read_image_dir('%s/%s_mask%s' % (opt.ref_dir,opt.ref_name[:-4],opt.ref_name[-4:]), opt)
+            mask = functions.read_image_dir('%s/%s' % (opt.mask_dir,opt.mask_name), opt)
             if ref.shape[3] != real.shape[3]:
                 '''
                 mask = imresize(mask, real.shape[3]/ref.shape[3], opt)
